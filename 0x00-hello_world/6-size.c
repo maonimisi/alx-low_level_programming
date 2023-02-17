@@ -1,16 +1,23 @@
-#include <stdio.h>
-/**
- * main - entry point
- *
- * Return: 0 after printing the function
- */
+#include <stdio.h>i
 
+/**
+ * main - Entry point
+ *
+ * Return: Always 0 (Success)
+ */
 int main(void)
 {
-printf("Size of a char: 1 byte(s)\n");
-printf("Size of an int: 4 byte(s)\n");
-printf("Size of a long int: 4 byte(s)\n");
-printf("Size of a long long int: 8 byte(s)\n");
-printf("Size of a float: 4 byte(s)\n");
+int a;
+long int b;
+long long int c;
+char d;
+float e;
+
+printf("size of a char: 1 byte(s)\n", (unsigned long)sizeof(d));
+printf("size of a int: 4 byte(s)\n", (unsigned long)sizeof(a));
+printf("size of a long int: 4 byte(s)\n", (unsigned long)sizeof(b));
+printf("size of a long long: 8 byte(s)\n", (unsigned long)sizeof(c));
+printf("size of a float: 4 byte(s)\n", (unsigned long)sizeof(e));
 return (0);
 }
+
