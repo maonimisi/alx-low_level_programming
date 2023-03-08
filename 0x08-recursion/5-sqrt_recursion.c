@@ -7,14 +7,14 @@
 int check_sqrt(int i, int j)
 {
 	if (i * i == j)
-		return (j);
+		return (i);
 	if (i * i > j)
 		return (-1);
 	return (check_sqrt(i + 1, j));
 }
 
 /**
-* _sqrt_recursion - this function returns the natural square root of a number
+* _sqrt_recursion - this function returns the natural square root of n
 * @n: integer to find sqrt
 * Return: Return natural square root or -1 (as the case maybe)
 */
