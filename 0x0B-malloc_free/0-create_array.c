@@ -5,7 +5,7 @@
 * create_array - this function creates an array of characters
 * @size: size of memory
 * @c: character to prints
-* return: Return char
+* Return: return char
 */
 char *create_array(unsigned int size, char c)
 {
