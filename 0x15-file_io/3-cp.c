@@ -2,7 +2,7 @@
 /**
  * main - copies the content from one file to another
  * @argv: number of argument passed
- * @argv: argument vector
+ * @argv: argument vector passed
  * Return: Return 1 on success , exit 97, 98, 99, 100 on error
  */
 int main (int argc, char **argv)
