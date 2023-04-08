@@ -1,11 +1,11 @@
 #include "main.h"
 /**
  * main - copies the content from one file to another
- * @argv: number of argument passed
- * @argv: argument vector passed
+ * @argc: number of argument passed
+ * @argv: argument vector
  * Return: Return 1 on success , exit 97, 98, 99, 100 on error
  */
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	int fopen1, fopen2, fReadCounter, fWriteCounter, output1, output2;
 	char buffer[BUFSIZ];
@@ -22,7 +22,7 @@ int main (int argc, char **argv)
 	{
 		fWriteCounter = write(fopen2, buffer, fReadCounter);
 		if (fWriteCounter != fReadCounter)
-			dprintf(STDERR_FILENO, "Error: Can't write to argv[2]\n"), exit(99);
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]), exit(99);
 	}
 	if (fReadCounter == -1)
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]), exit(98);
@@ -31,6 +31,6 @@ int main (int argc, char **argv)
 		dprintf(STDERR_FILENO, "Error: Can't close output1 %d\n", fopen1), exit(100);
 	output2 = close(fopen2);
 	if (output2 == -1)
-		dprintf(STDERR_FILENO, "Error: Can't close output1 %d\n", fopen2), exit (100);
+		dprintf(STDERR_FILENO, "Error: Can't close output1 %d\n", fopen2), exit(100);
 	return (0);
 }
