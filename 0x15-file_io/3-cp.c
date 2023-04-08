@@ -15,7 +15,7 @@ int main (int argc, char **argv)
 	fopen1 = open(argv[1], O_RDONLY);
 	if (fopen1 == -1)
 		dprintf(STDERR_FILENO, "Error: Can't read from file argv[1]\n"), exit(98);
-	fopen2 = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	fopen2 = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0600);
 	if (fopen2 == -1)
 		dprintf(STDERR_FILENO, "Error: Can't write to argv[2]\n"), exit(99);
 	while ((fReadCounter = read(fopen1, buffer, BUFSIZ)) > 0)
@@ -28,9 +28,9 @@ int main (int argc, char **argv)
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]), exit(98);
 	output1 = close(fopen1);
 	if (output1 == -1)
-		dprintf(STDERR_FILENO, "Error: Can't close output1 %d\n", output1), exit(100);
+		dprintf(STDERR_FILENO, "Error: Can't close output1 %d\n", fopen1), exit(100);
 	output2 = close(fopen2);
 	if (output2 == -1)
-		dprintf(STDERR_FILENO, "Error: Can't close output1 %d\n", output2), exit (100);
+		dprintf(STDERR_FILENO, "Error: Can't close output1 %d\n", fopen2), exit (100);
 	return (0);
 }
