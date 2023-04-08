@@ -1,4 +1,4 @@
-include "main.h"
+#include "main.h"
 /**
  * create_file - this function creates a file
  * @text_content: is a NULL terminated string to write to the file
@@ -7,7 +7,7 @@ include "main.h"
  */
 int create_file(const char *filename, char *text_content)
 {
-	int fopen, fwrite, i = 0;
+	int fopen, fwrite, i;
 
 	if (filename == NULL)
 		return (-1);
