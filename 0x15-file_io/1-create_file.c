@@ -18,7 +18,7 @@ int create_file(const char *filename, char *text_content)
 			i++;
 	}
 	fopen = open(filename, O_CREAT | O_RDWR | O_TRUNC, 0600);
-	fwrite = write(fopen, text_content, i);
+	fwrite = write(fopen, text_content, i++);
 
 	if (fopen == -1 || fwrite == -1)
 		return (-1);
