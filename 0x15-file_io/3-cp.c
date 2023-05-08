@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 			close(fd_to);
 			return (99);
 		}
-	
+	}
 	if (bytes_read == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
