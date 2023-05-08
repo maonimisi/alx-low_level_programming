@@ -1,60 +1,62 @@
 #include "main.h"
+#define BUFFER_SIZE 1024
 /**
  * main - copies the content from one file to another
  * @argc: number of arguments passed
  * @argv: argument vector
- * Return: Return 0 on success, 97, 98, 99, 100 on error
+ * Return: Return 0 on success, exit codes on error
  */
 int main(int argc, char **argv)
 {
-	int fopen1, fopen2, fReadCounter, fWriteCounter;
-	char buffer[BUFSIZ];
+	int fd_from, fd_to;
+	ssize_t bytes_read, bytes_written;
+	char buffer[BUFFER_SIZE];
 
 	if (argc != 3)
 	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		return (97);
 	}
-	fopen1 = open(argv[1], O_RDONLY);
-	if (fopen1 == -1)
+	fd_from = open(argv[1], O_RDONLY);
+	if (fd_from == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		return (98);
 	}
-	fopen2 = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0600);
-	if (fopen2 == -1)
+	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	if (fd_to == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", argv[2]);
-		close(fopen1);
+		close(fd_from);
 		return (99);
 	}
-	while ((fReadCounter = read(fopen1, buffer, BUFSIZ)) > 0)
+	while ((bytes_read = read(fd_from, buffer, BUFFER_SIZE)) > 0)
 	{
-		fWriteCounter = write(fopen2, buffer, fReadCounter);
-		if (fWriteCounter != fReadCounter)
+		bytes_written = write(fd_to, buffer, bytes_read);
+		if (bytes_written == -1 || bytes_written != bytes_read)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", argv[2]);
-			close(fopen1);
-			close(fopen2);
+			close(fd_from);
+			close(fd_to);
 			return (99);
 		}
-	}
-	if (fReadCounter == -1)
+	
+	if (bytes_read == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		close(fopen1);
-		close(fopen2);
+		close(fd_from);
+		close(fd_to);
 		return (98);
 	}
-	if (close(fopen1) == -1)
+	if (close(fd_from) == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close file descriptor %d\n", fopen1);
-		close(fopen2);
+		dprintf(STDERR_FILENO, "Error: Can't close file descriptor %d\n", fd_from);
+		close(fd_to);
 		return (100);
 	}
-	if (close(fopen2) == -1)
+	if (close(fd_to) == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close file descriptor %d\n", fopen2);
+		dprintf(STDERR_FILENO, "Error: Can't close file descriptor %d\n", fd_to);
 		return (100);
 	}
 	return (0);
