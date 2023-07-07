@@ -19,7 +19,7 @@ void hash_table_print(const hash_table_t *ht)
 		while (curr_hash_node != NULL)
 		{
 			if (flag == 1)
-				printf(",");
+				printf(", ");
 			printf("'%s': '%s'",
 				curr_hash_node->key, curr_hash_node->value);
 			flag = 1;
