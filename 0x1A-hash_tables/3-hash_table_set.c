@@ -17,10 +17,8 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		return (0);
 	if (ht->size == 0 || ht->array == NULL)
 		return (0);
-
 	i = key_index((unsigned char *)key, ht->size);
 	curr_hash_node = ht->array[i];
-
 	while (curr_hash_node != NULL)
 	{
 		if (strcmp(curr_hash_node->key, key) == 0)
